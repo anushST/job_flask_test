@@ -19,20 +19,31 @@ python3 -m venv venv
 ```
 
 *  Linux/macOS
+    ```
+    python3 -m venv venv
+    ```
 
     ```
     source venv/bin/activate
     ```
 
+    ```
+    python3 -m pip install --upgrade pip
+    ```
+
 *  windows
+    ```
+    python -m venv venv
+    ```
 
     ```
     source venv/scripts/activate
     ```
 
-```
-python3 -m pip install --upgrade pip
-```
+    ```
+    python -m pip install --upgrade pip
+    ```
+
 
 Install dependencies from requirements.txt:
 
