@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Manufacturers list</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Country</th>
+                <th>Certificates</th>
+                <th>Internal ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for manufacturer in manufacturers %}
+                <tr>
+                    <td>{{ manufacturer.name }}</td>
+                    <td>{{ manufacturer.description }}</td>
+                    <td>{{ manufacturer.country }}</td>
+                    <td>{{ manufacturer.certificates }}</td>
+                    <td>{{ manufacturer.internal_id }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button onclick="document.getElementById('manufacturerModal').style.display='block'">Add manufacturer</button>
+
+    <div id="manufacturerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="document.getElementById('manufacturerModal').style.display='none'">&times;</span>
+            <h2>Add new manufacturer</h2>
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                {{ form.name.label }} {{ form.name(size=32) }}<br>
+                {{ form.description.label }} {{ form.description(rows=4) }}<br>
+                {{ form.country.label }} {{ form.country(size=32) }}<br>
+                {{ form.certificates.label }} {{ form.certificates(rows=4) }}<br>
+                {{ form.internal_id.label }} {{ form.internal_id(size=32) }}<br>
+                {{ form.submit() }}
+            </form>
+        </div>
+    </div>
+{% endblock %}

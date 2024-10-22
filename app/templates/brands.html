@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Brands list</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Logo</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Internal ID</th>
+                <th>Manufacturers</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for brand in brands %}
+                <tr>
+                    <td><img src="{{ request.url_root }}{{ brand.logo }}" alt="{{ brand.name }}" width="50"></td>
+                    <td>{{ brand.name }}</td>
+                    <td>{{ brand.description }}</td>
+                    <td>{{ brand.internal_id }}</td>
+                    <td>
+                        {% if brand.manufacturers %}
+                            {% for manufacturer in brand.manufacturers %}
+                                {{ manufacturer.name }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            No manufacturers
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button onclick="document.getElementById('brandModal').style.display='block'">Add brand</button>
+
+    <div id="brandModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="document.getElementById('brandModal').style.display='none'">&times;</span>
+            <h2>Add new brand</h2>
+            <form method="POST" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                {{ form.logo.label }} {{ form.logo(size=32) }}<br>
+                {{ form.name.label }} {{ form.name(size=32) }}<br>
+                {{ form.description.label }} {{ form.description(rows=4) }}<br>
+                {{ form.internal_id.label }} {{ form.internal_id(size=32) }}<br>
+                {{ form.manufacturer_ids.label }} {{ form.manufacturer_ids(size=8) }}
+                {{ form.submit() }}
+            </form>
+        </div>
+    </div>
+{% endblock %}
