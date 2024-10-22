@@ -14,10 +14,6 @@ cd job_flask_test
 
 Create and activate virtual environment:
 
-```
-python3 -m venv venv
-```
-
 *  Linux/macOS
     ```
     python3 -m venv venv
