@@ -10,13 +10,6 @@ def is_file_ext_allowed(file_name: str, allowed_extensions: set) -> bool:
     return False
 
 
-def create_directory_if_not_exists(directory_path):
-    """Create the directory if it does not exist."""
-    if not os.path.exists(directory_path):
-        os.makedirs(directory_path)
-        print(f"Directory {directory_path} created.")
-
-
 class FilePath:
     """The class generates new uuid filename."""
 
@@ -30,6 +23,7 @@ class FilePath:
         self.absolute_path = self._get_absolute_path()
         self.rel_path_filename = self._get_relative_path_with_filename()
         self.abs_path_filename = self._get_absolute_path_with_filename()
+        self.url_path_type = self._get_url_type_rel_path_with_name()
 
     def _generate_unique_filename(self):
         """Generate a unique filename based on UUID."""
@@ -54,4 +48,8 @@ class FilePath:
 
     def _get_absolute_path_with_filename(self):
         """Get the absolute path for saving the file including filename."""
-        return os.path.join(self.base_dir, self.relative_path)
+        return os.path.join(self.base_dir, self.rel_path_filename)
+
+    def _get_url_type_rel_path_with_name(self):
+        """Get the relative path in url format with '/'."""
+        return self.rel_path_filename.replace('\\', '/')

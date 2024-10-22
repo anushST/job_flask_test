@@ -6,8 +6,7 @@ from app import db
 from app.forms import BrandForm
 from app.models import Brand, Manufacturer
 from app.settings import ALLOWED_IMAGE_EXTENSIONS, BASE_DIR, UPLOAD_FOLDER
-from app.utils import (is_file_ext_allowed, create_directory_if_not_exists,
-                       FilePath)
+from app.utils import is_file_ext_allowed, FilePath
 
 
 class BrandController:
@@ -24,11 +23,10 @@ class BrandController:
                                             ALLOWED_IMAGE_EXTENSIONS):
                 file_path = FilePath(file.filename, UPLOAD_FOLDER,
                                      BASE_DIR)
-                create_directory_if_not_exists(file_path.absolute_path)
                 file.save(file_path.abs_path_filename)
 
                 brand = Brand(
-                    logo=file_path.relative_path,
+                    logo=file_path.url_path_type,
                     name=form.name.data,
                     description=form.description.data,
                     internal_id=form.internal_id.data

@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
-UPLOAD_FOLDER = 'static/uploads/'
+UPLOAD_FOLDER = os.path.join('static', 'uploads')
 ALLOWED_IMAGE_EXTENSIONS = ['png', 'jpg', 'jpeg']
 
 

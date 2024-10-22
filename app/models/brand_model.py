@@ -1,3 +1,5 @@
+from flask import request
+
 from .manufacturer_model import Manufacturer
 from app import db
 
@@ -36,7 +38,7 @@ class Brand(db.Model):
             'name': brand.name,
             'description': brand.description,
             'internal_id': brand.internal_id,
-            'logo': brand.logo,
+            'logo': f'{request.host_url}{brand.logo}',
             'manufacturers': [Manufacturer.serialize_manufacturer(m)
                               for m in brand.manufacturers]
         }
